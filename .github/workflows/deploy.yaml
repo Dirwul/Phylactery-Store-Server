@@ -18,7 +18,7 @@ jobs:
 
       - name: Deploy new jar with service restart
         run: |
-          sudo systemctl stop phylac.service
+          sudo -n systemctl stop phylac.service
           mv target/PhylacStoreServer-0.0.1-SNAPSHOT.jar /app/phylac/app.jar
-          sudo systemctl start phylac.service
-          sudo systemctl status phylac.service --no-pager
+          sudo -n systemctl start phylac.service
+          sudo -n systemctl status phylac.service --no-pager
