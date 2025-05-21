@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Checkout code
@@ -22,23 +22,13 @@ jobs:
       - name: Build with Maven
         run: mvn clean package
 
-      - name: Copy jar to server
-        uses: appleboy/scp-action@v0.1.1
-        with:
-          host: ${{ secrets.SERVER_IP }}
-          username: github-actions
-          key: ${{ secrets.SSH_KEY }}
-          source: target/PhylacStoreServer-0.0.1-SNAPSHOT.jar
-          target: /app/phylac/tmp-app.jar
+      - name: Copy jar locally
+        run: mv target/PhylacStoreServer-0.0.1-SNAPSHOT.jar /app/phylac/tmp-app.jar
 
       - name: Deploy new jar with service restart
-        uses: appleboy/ssh-action@v0.1.5
-        with:
-          host: ${{ secrets.SERVER_IP }}
-          username: github-actions
-          key: ${{ secrets.SSH_KEY }}
-          script: |
-            sudo systemctl stop phylac.service
-            mv /app/phylac/tmp-app.jar /app/phylac/app.jar
-            sudo systemctl start phylac.service
-            sudo systemctl status phylac.service --no-pager
+        run: |
+          sudo systemctl stop phylac.service
+          mv /app/phylac/tmp-app.jar /app/phylac/app.jar
+          sudo systemctl start phylac.service
+          sudo systemctl status phylac.service --no-pager
+
