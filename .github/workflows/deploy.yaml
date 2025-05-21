@@ -13,22 +13,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up JDK 21
-        uses: actions/setup-java@v3
-        with:
-          distribution: temurin
-          java-version: 21
-
       - name: Build with Maven
         run: mvn clean package
-
-      - name: Copy jar locally
-        run: mv target/PhylacStoreServer-0.0.1-SNAPSHOT.jar /app/phylac/tmp-app.jar
 
       - name: Deploy new jar with service restart
         run: |
           sudo systemctl stop phylac.service
-          mv /app/phylac/tmp-app.jar /app/phylac/app.jar
+          mv target/PhylacStoreServer-0.0.1-SNAPSHOT.jar /app/phylac/app.jar
           sudo systemctl start phylac.service
           sudo systemctl status phylac.service --no-pager
-
