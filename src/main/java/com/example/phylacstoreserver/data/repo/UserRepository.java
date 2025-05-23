@@ -1,5 +1,6 @@
-package com.example.phylacstoreserver.data;
+package com.example.phylacstoreserver.data.repo;
 
+import com.example.phylacstoreserver.data.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

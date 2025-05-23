@@ -1,4 +1,4 @@
-package com.example.phylacstoreserver.api.dto;
+package com.example.phylacstoreserver.data.dto;
 
 public record UserDTO(
 	String username,

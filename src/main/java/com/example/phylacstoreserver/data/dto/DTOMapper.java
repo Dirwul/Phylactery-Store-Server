@@ -1,7 +1,6 @@
-package com.example.phylacstoreserver.utils;
+package com.example.phylacstoreserver.data.dto;
 
-import com.example.phylacstoreserver.api.dto.UserDTO;
-import com.example.phylacstoreserver.data.User;
+import com.example.phylacstoreserver.data.entity.User;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

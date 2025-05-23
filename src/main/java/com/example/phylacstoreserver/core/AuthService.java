@@ -1,9 +1,9 @@
-package com.example.phylacstoreserver.api;
+package com.example.phylacstoreserver.core;
 
-import com.example.phylacstoreserver.api.dto.UserDTO;
-import com.example.phylacstoreserver.data.User;
-import com.example.phylacstoreserver.data.UserRepository;
-import com.example.phylacstoreserver.utils.DTOMapper;
+import com.example.phylacstoreserver.data.dto.UserDTO;
+import com.example.phylacstoreserver.data.entity.User;
+import com.example.phylacstoreserver.data.repo.UserRepository;
+import com.example.phylacstoreserver.data.dto.DTOMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +19,17 @@ public class AuthService {
 
 	private final UserRepository userRepository;
 	private final DTOMapper mapper;
+	private final StoreService storeService;
 
 	@Autowired
-	public AuthService(UserRepository userRepository, DTOMapper mapper) {
+	public AuthService(
+		UserRepository userRepository,
+		DTOMapper mapper,
+		StoreService storeService
+	) {
 		this.userRepository = userRepository;
 		this.mapper = mapper;
+		this.storeService = storeService;
 	}
 
 	public Optional<String> signUp(UserDTO userDTO) {
@@ -31,14 +37,15 @@ public class AuthService {
 			return Optional.empty();
 		}
 
+		// create entity & generate token
 		User user = mapper.toEntity(userDTO);
-		String token = UUID.randomUUID().toString();
-		user.setToken(token);
+		user.setToken(generateToken());
 		userRepository.save(user);
 
-		// todo: здесь должна вызываться разметка пространства для пользователя
+		// init user on system
+		storeService.init(user);
 
-		return Optional.of(token);
+		return Optional.of(user.getToken());
 	}
 
 	public Optional<String> login(UserDTO userDTO) {
@@ -48,5 +55,9 @@ public class AuthService {
 			return Optional.empty();
 		}
 		return Optional.of(userOpt.get().getToken());
+	}
+
+	private String generateToken() {
+		return UUID.randomUUID().toString();
 	}
 }

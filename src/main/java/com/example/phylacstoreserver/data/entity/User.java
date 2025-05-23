@@ -1,4 +1,4 @@
-package com.example.phylacstoreserver.data;
+package com.example.phylacstoreserver.data.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
