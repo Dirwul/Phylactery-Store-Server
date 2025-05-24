@@ -6,6 +6,13 @@ on:
       - main
 
 jobs:
+  setup-environment:
+    runs-on: self-hosted
+
+    steps:
+      - name: Setup ngrok token
+        run: ngrok config add-authtoken ${{ secrets.NGROK_TOKEN }}
+
   build-and-deploy:
     runs-on: self-hosted
 

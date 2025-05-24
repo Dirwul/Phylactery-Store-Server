@@ -13,12 +13,16 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>PhylacStoreServer</name>
     <description>PhylacStoreServer</description>
-    <url/>
+    <url>https://github.com/Dirwul/Phylactery-Store-Server</url>
     <licenses>
         <license/>
     </licenses>
     <developers>
-        <developer/>
+        <developer>
+            <id>dirwul</id>
+            <name>Круглов Иван</name>
+            <email>dirwulviques@gmail.com</email>
+        </developer>
     </developers>
     <scm>
         <connection/>
@@ -28,6 +32,7 @@
     </scm>
     <properties>
         <java.version>21</java.version>
+        <ngrok.version>1.1.1</ngrok.version>
     </properties>
     <dependencies>
         <dependency>
@@ -73,6 +78,7 @@
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <!-- Map Struct -->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
