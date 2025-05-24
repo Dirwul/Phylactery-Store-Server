@@ -11,3 +11,5 @@ spring:
       ddl-auto: validate
     show-sql: true
     open-in-view: false
+    properties:
+      hibernate.transaction.jta.platform: org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform
