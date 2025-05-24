@@ -15,6 +15,7 @@ jobs:
 
   build-and-deploy:
     runs-on: self-hosted
+    needs: setup-environment
 
     steps:
       - name: Checkout code
