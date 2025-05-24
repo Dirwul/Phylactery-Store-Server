@@ -6,18 +6,18 @@ on:
       - main
 
 jobs:
-
   build-and-deploy:
     runs-on: self-hosted
+
+    env:
+      DB_PASS: ${{ secrets.DB_PASS }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set environment variables
-        env:
-          DB_PASS: ${{ secrets.DB_PASS }}
-        run: sudo -n systemctl set-environment DB_PASS=$DB_PASS
+      - name: Setup Env Variables
+        run: echo "DB_PASS=${DB_PASS}" > /app/phylac/phylac.env
 
       - name: Build with Maven
         run: mvn clean package
