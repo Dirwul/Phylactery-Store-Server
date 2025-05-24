@@ -2,8 +2,8 @@ spring:
   application:
     name: PhylacStoreServer
   datasource:
-    url: jdbc:postgresql://localhost:5432/phylactory_db
-    username:
+    url: jdbc:postgresql://localhost:5432/phylactery_db
+    username: dirwul
     password:
     driver-class-name: org.postgresql.Driver
   jpa:
