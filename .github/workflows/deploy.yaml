@@ -14,9 +14,13 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build with Maven
+        env:
+          DB_PASS: ${{ secrets.DB_PASS }}
         run: mvn clean package
 
       - name: Deploy new jar with service restart
+        env:
+          DB_PASS: ${{ secrets.DB_PASS }}
         run: |
           sudo -n systemctl stop phylac.service
           mv target/PhylacStoreServer-0.0.1-SNAPSHOT.jar /app/phylac/app.jar
