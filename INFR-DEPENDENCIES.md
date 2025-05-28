@@ -4,4 +4,4 @@
 2. Maven
 3. PostgreSQL
 4. Samba (и создание пространства)
-5. nginx
+5. 
