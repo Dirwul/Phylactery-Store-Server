@@ -21,9 +21,9 @@ public class NotFoundController implements ErrorController {
 
 		if (statusCode == 404) {
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-			response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+			response.setContentType(MediaType.TEXT_HTML_VALUE);
 
-			try (InputStream in = getClass().getResourceAsStream("/static/okak.jpg");
+			try (InputStream in = getClass().getResourceAsStream("/static/404.html");
 				OutputStream out = response.getOutputStream()
 			) {
 				if (in != null) {
