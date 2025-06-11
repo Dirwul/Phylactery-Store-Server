@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.dirwul.phylacterystoreserver.data.model.UserCredentials;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api")
 public class AuthController {
@@ -27,11 +29,11 @@ public class AuthController {
 	}
 
 	@GetMapping("/uuid")
-	public ResponseEntity<String> getUUID(@RequestHeader("Authorization") String authHeader) {
+	public ResponseEntity<UUID> getUUID(@RequestHeader("Authorization") String authHeader) {
 		if (authHeader == null || !authHeader.startsWith("Bearer ")) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 		}
 		String token =  authHeader.substring(7); // remove 'Bearer '
-		return ResponseEntity.ok(userService.getUserUUID(token).toString());
+		return ResponseEntity.ok(userService.getUserUUID(token));
 	}
 }
