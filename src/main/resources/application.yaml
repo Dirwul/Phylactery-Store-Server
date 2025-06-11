@@ -1,0 +1,21 @@
+server:
+  port: 9010
+spring:
+  application:
+    name: Phylactery-Store-Server
+  datasource:
+    url: jdbc:postgresql://localhost:5432/phylactery_server
+    username: ${DB_NAME}
+    password: ${DB_PASS}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  sql:
+    init:
+      mode: always
+
+minio:
+  user: ${MINIO_USER}
+  password: ${MINIO_PASS}

@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    username: dirwul
+    password: AloneNya
+minio:
+  user: dirwul
+  password: AloneNya
