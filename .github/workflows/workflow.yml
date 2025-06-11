@@ -5,13 +5,9 @@ on:
 
 jobs:
   deploy:
-    runs-on: [ self-hosted, Linux ]
+    runs-on: [ self-hosted ]
 
     steps:
-      - name: Copy Github Secrets to .env file
-        run: |
-          echo "${{ secrets.ENV_KEYS }}" | sudo tee /app/phylactery.env > /dev/null
-
       - name: Checkout code
         uses: actions/checkout@v3
 
