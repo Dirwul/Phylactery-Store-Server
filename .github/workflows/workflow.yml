@@ -16,8 +16,8 @@ jobs:
     steps:
       - name: show credentials
         run: |
-          echo "DB_USER=${DB_USER}"
-          echo "DB_PASS=${DB_PASS}"
+          echo "DB_USER length: ${#DB_USER}"
+          echo "DB_PASS length: ${#DB_PASS}"
 
       - name: Checkout code
         uses: actions/checkout@v3
