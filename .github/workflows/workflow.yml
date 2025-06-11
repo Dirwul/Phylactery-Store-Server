@@ -3,14 +3,6 @@ on:
   push:
     branches: [ main ]
 
-env:
-  # secret
-  DB_USER: ${{ secrets.DB_USER }}
-  DB_PASS: ${{ secrets.DB_PASS }}
-  MINIO_USER: ${{ secrets.MINIO_USER }}
-  MINIO_PASS: ${{ secrets.MINIO_PASS }}
-
-
 jobs:
   deploy:
     runs-on: [ self-hosted, Linux ]
@@ -26,3 +18,8 @@ jobs:
           sudo systemctl stop phylactery.service
           sudo mv target/phylactery-store.jar /app/phylactery-store.jar
           sudo systemctl start phylactery.service
+        env:
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASS: ${{ secrets.DB_PASS }}
+          MINIO_USER: ${{ secrets.MINIO_USER }}
+          MINIO_PASS: ${{ secrets.MINIO_PASS }}
