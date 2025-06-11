@@ -5,7 +5,7 @@ spring:
     name: Phylactery-Store-Server
   datasource:
     url: jdbc:postgresql://localhost:5432/phylactery_server
-    username: ${DB_NAME}
+    username: ${DB_USER}
     password: ${DB_PASS}
     driver-class-name: org.postgresql.Driver
   jpa:
