@@ -7,17 +7,10 @@ jobs:
   deploy:
     runs-on: [ self-hosted, Linux ]
 
-    env:
-      DB_USER: ${{ secrets.DB_USER }}
-      DB_PASS: ${{ secrets.DB_PASS }}
-      MINIO_USER: ${{ secrets.MINIO_USER }}
-      MINIO_PASS: ${{ secrets.MINIO_PASS }}
-
     steps:
-      - name: show credentials
+      - name: Copy Github Secrets to .env file
         run: |
-          echo "DB_USER length: ${#DB_USER}"
-          echo "DB_PASS length: ${#DB_PASS}"
+          echo "${{ secrets.ENV_KEYS }}" > /app/phylactery.env
 
       - name: Checkout code
         uses: actions/checkout@v3
