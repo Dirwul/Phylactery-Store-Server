@@ -11,14 +11,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Export env-variables
+      - name: Load env and build
         run: |
           set -a
           source /app/phylactery.env
           set +a
-
-      - name: Build
-        run: mvn clean package
+          mvn clean package
 
       - name: Update .jar
         run: |
