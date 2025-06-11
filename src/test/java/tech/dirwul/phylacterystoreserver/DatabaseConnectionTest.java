@@ -1,5 +1,6 @@
 package tech.dirwul.phylacterystoreserver;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,10 +23,18 @@ public class DatabaseConnectionTest {
 	@Autowired
 	private DataSource dataSource;
 
-	@Value("${spring.datasource.username}")
 	private String db_user;
-	@Value("${spring.datasource.password}")
 	private String db_password;
+
+	@BeforeAll
+	static void logging(
+		@Value("${spring.datasource.username}") String user,
+		@Value("${spring.datasource.password}") String password
+	) {
+		log.warn("Autowired:");
+		log.warn("Database user: {}", user);
+		log.warn("Database password: {}", password);
+	}
 
 	@Test
 	void contextLoads() throws SQLException {
@@ -36,9 +45,6 @@ public class DatabaseConnectionTest {
 
 	@Test
 	void testDatabaseConfig() {
-		log.warn("Autowired:");
-		log.warn("Database user: {}", this.db_user);
-		log.warn("Database password: {}", this.db_password);
 		assertTrue("DB_USER not matching with correct!", db_user.equals("dirwul"));
 	}
 
