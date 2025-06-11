@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Copy Github Secrets to .env file
         run: |
-          sudo echo "${{ secrets.ENV_KEYS }}" > /app/phylactery.env
+          echo "${{ secrets.ENV_KEYS }}" | sudo tee /app/phylactery.env > /dev/null
 
       - name: Checkout code
         uses: actions/checkout@v3
