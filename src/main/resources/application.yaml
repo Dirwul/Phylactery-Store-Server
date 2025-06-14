@@ -15,5 +15,7 @@ spring:
       ddl-auto: validate
 
 minio:
-  user: ${MINIO_USER}
-  password: ${MINIO_PASS}
+  endpoint: "http://localhost:9000"
+  root:
+    accessKey: ${MINIO_USER}
+    secretKey: ${MINIO_PASS}

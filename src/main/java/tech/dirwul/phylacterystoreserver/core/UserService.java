@@ -36,7 +36,7 @@ public class UserService {
 
 		User user = new User(credentials);
 		user = userRepository.save(user); // init user
-		storageService.setupUserStorage(user.getId());
+		storageService.setupUserStorage(user);
 		return user.getToken();
 	}
 
