@@ -31,19 +31,7 @@ public class StorageService {
 		String bucketName = user.getId() + "-bucket";
 		String policyName = user.getId() + "-full-access-policy";
 
-		// 1. create user
-		try {
-			adminClient.addUser(
-				user.getUsername(),
-				UserInfo.Status.ENABLED,
-				user.getPassword(),
-				policyName,
-				List.of());
-			log.debug("Minio user {} created successfully", user.getUsername());
-		} catch (Exception e) {
-			log.error("Failed to add user bucket {} to the minio bucket: {}", user.getUsername(), e.getMessage());
-		}
-		// 2. create bucket
+		// 1. create bucket
 		try {
 			if (!minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build())) {
 				minioClient.makeBucket(MakeBucketArgs.builder().bucket(bucketName).build());
@@ -52,13 +40,25 @@ public class StorageService {
 		} catch (Exception e) {
 			log.error("Failed to create bucket: {}", e.getMessage());
 		}
-		// 3. generate policy
+		// 2. generate policy
 		try {
 			String policyJson = generateFullAccessPolicy(bucketName);
 			adminClient.addCannedPolicy(policyName, policyJson);
 			log.debug("Create policy {} successfully", policyName);
 		} catch (Exception e) {
 			log.error("Failed to create policy: {}", e.getMessage());
+		}
+		// 3. create user
+		try {
+			adminClient.addUser(
+				user.getUsername(),
+				UserInfo.Status.ENABLED,
+				user.getPassword(),
+				null,
+				List.of());
+			log.debug("Minio user {} created successfully", user.getUsername());
+		} catch (Exception e) {
+			log.error("Failed to add user bucket {} to the minio bucket: {}", user.getUsername(), e.getMessage());
 		}
 		// 4. set policy to user
 		try {
