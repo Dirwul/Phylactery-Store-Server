@@ -54,19 +54,19 @@ public class StorageService {
 				user.getUsername(),
 				UserInfo.Status.ENABLED,
 				user.getPassword(),
-				null,
+				policyName,
 				List.of());
 			log.debug("Minio user {} created successfully", user.getUsername());
 		} catch (Exception e) {
 			log.error("Failed to add user bucket {} to the minio bucket: {}", user.getUsername(), e.getMessage());
 		}
-		// 4. set policy to user
+		/*// 4. set policy to user
 		try {
 			adminClient.setPolicy(user.getUsername(), false, policyName);
 			log.debug("Set policy {} successfully", policyName);
 		} catch (Exception e) {
 			log.error("Failed to set policy: {}", e.getMessage());
-		}
+		}*/
 	}
 
 	private String generateFullAccessPolicy(String bucketName) {
